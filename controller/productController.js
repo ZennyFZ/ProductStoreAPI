@@ -3,22 +3,15 @@ const Products = require('../model/product')
 class productController {
     getAllProducts(req, res, next) {
         Products.find({}).then((products) => {
-            console.log("products: ", products)
-            res.json(products)
+            console.log(Products)
+            res.status(200).json(products)
         }).catch(next)
     }
 
     getProductById(req, res, next) {
-        const id = req.params.id
+        const id = req.params.productId
         Products.findById({_id : id}).then((product) => {
-            res.json(product)
-        }).catch(next)
-    }
-
-    findProductById(req, res, next) {
-        const id = req.params.id
-        Products.findById({_id : id}).then((product) => {
-            return product
+            res.status(200).json(product)
         }).catch(next)
     }
 
@@ -39,7 +32,7 @@ class productController {
     }
 
     updateProduct(req, res, next) {
-        const id = req.params.id
+        const id = req.params.productId
         const existCheck = this.findProductById(req, res, next)
         if(!existCheck) {
             res.json({
@@ -55,7 +48,7 @@ class productController {
     }
 
     deleteProduct(req, res, next) {
-        const id = req.params.id
+        const id = req.params.productId
         const existCheck = this.findProductById(req, res, next)
         if(!existCheck) {
             res.json({
