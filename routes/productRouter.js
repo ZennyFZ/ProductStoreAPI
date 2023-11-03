@@ -9,6 +9,9 @@ productRouter.route('/')
 productRouter.route('/:productId')
 .get(productController.getProductById)
 
+productRouter.route('/search/:productName')
+.get(productController.searchProductByName)
+
 productRouter.route('/edit/:productId')
 .patch(productController.updateProduct)
 

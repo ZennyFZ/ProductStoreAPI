@@ -22,6 +22,17 @@ class productController {
         }).catch(next)
     }
 
+    searchProductByName(req, res, next) {
+        const name = req.params.productName;
+        const regex = new RegExp(name, "i");
+    
+        Products.find({ name: { $regex: regex } })
+            .then((products) => {
+                res.status(200).json(products);
+            })
+            .catch(next);
+    }
+
     createProduct(req, res, next) {
         const product = new Products(req.body)
         const duplicatedCheck = this.findProductById(req, res, next)
