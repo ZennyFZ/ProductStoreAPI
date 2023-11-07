@@ -15,14 +15,14 @@ class orderController {
         }).catch(next)
     }
 
-    getOrderById(req, res, next) {
-        order.findById(req.params.orderId).then((order) => {
+    getOrderByCustomerID(req, res, next) {
+        order.find({ customerID: req.params.customerID }).then((order) => {
             res.status(200).json(order);
         }).catch(next)
     }
 
-    getOrderByDate(req, res, next) {
-        order.find({ date: req.params.date }).then((order) => {
+    getCustomerOrderByDate(req, res, next) {
+        order.find({ customerID: req.params.customerID, createDate: req.params.date }).then((order) => {
             res.status(200).json(order);
         }).catch(next)
     }

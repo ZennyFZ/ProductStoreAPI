@@ -7,9 +7,9 @@ orderRouter.route('/')
 .post(orderController.createOrder)
 
 orderRouter.route('/:orderId')
-.get(orderController.getOrderById)
+.get(orderController.getOrderByCustomerID)
 
 orderRouter.route('/filter/:date')
-.get(orderController.getOrderByDate)
+.get(orderController.getCustomerOrderByDate)
 
 module.exports = orderRouter;
