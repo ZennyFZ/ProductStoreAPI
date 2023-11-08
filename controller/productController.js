@@ -3,7 +3,7 @@ const Products = require('../model/product')
 class productController {
     getAllProducts(req, res, next) {
         Products.find({}).then((products) => {
-            console.log(Products)
+            products = products.filter(product => product.quantity > 0)
             res.status(200).json(products)
         }).catch(next)
     }

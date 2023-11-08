@@ -1,4 +1,5 @@
 const order = require('../model/order');
+const Products = require('../model/product');
 
 class orderController {
 
@@ -10,6 +11,12 @@ class orderController {
 
     createOrder(req, res, next) {
         let newOrder = new order(req.body);
+        newOrder.products.forEach((product) => {
+            Products.findOne({ name: product.productName }).then((productdb) => {
+                productdb.quantity -= product.quantity;
+                productdb.save();
+            }).catch(next)
+        });
         newOrder.save().then((order) => {
             res.status(200).json(order);
         }).catch(next)
