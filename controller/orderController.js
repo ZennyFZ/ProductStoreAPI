@@ -13,8 +13,14 @@ class orderController {
         let newOrder = new order(req.body);
         newOrder.products.forEach((product) => {
             Products.findOne({ name: product.productName }).then((productdb) => {
-                productdb.quantity -= product.quantity;
-                productdb.save();
+                if(productdb.quantity < product.quantity) {
+                    res.status(200).json({
+                        message: 'Not enough product'
+                    })
+                }else{
+                    productdb.quantity -= product.quantity;
+                    productdb.save();
+                }
             }).catch(next)
         });
         newOrder.save().then((order) => {
