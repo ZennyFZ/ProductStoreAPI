@@ -21,6 +21,7 @@ class productController {
     
         Products.find({ name: { $regex: regex } })
             .then((products) => {
+                products = products.filter(product => product.quantity > 0)
                 res.status(200).json(products);
             })
             .catch(next);
