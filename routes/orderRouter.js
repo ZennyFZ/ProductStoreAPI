@@ -6,7 +6,7 @@ orderRouter.route('/')
 .get(orderController.getAllOrders)
 .post(orderController.createOrder)
 
-orderRouter.route('/:orderId')
+orderRouter.route('/:customerID')
 .get(orderController.getOrderByCustomerID)
 
 orderRouter.route('/filter/:date')
